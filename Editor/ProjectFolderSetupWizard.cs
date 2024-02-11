@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEditor;
-using System;
 
 namespace Babbitt.Tools.Editor
 {
@@ -48,7 +47,7 @@ namespace Babbitt.Tools.Editor
         public bool UseNamespace = false;
         private string SFGUID;
         public List<string> nsFolders = new List<string>();
-        public List<string> folders = new List<string>() { "Scenes", "_Scripts", "Animation", "Audio", "Materials", "Meshes", "Prefabs", "Resources", "Textures", "Sprites" };
+        public List<string> folders = new List<string>() { "Scenes", "_Scripts", "Animation", "Audio", "Materials", "Meshes", "Prefabs", "Resources", "Textures", "Sprites", "Input", "GameEvents" };
        
         [MenuItem("Edit/Create Project Folders...")]
         static void CreateWizard()
@@ -70,6 +69,8 @@ namespace Babbitt.Tools.Editor
                     SFGUID = newFolderPath;
                 if (folder == "Resources")
                     InitializeResourcesFolder(newFolderPath);
+                if (folder == "Input")
+                    InitializeInputFolder(newFolderPath);
             }
 
             AssetDatabase.Refresh();
@@ -90,8 +91,8 @@ namespace Babbitt.Tools.Editor
         {
             if (UseNamespace == true)
                 addNamespaceFolders();
-            if (UseNamespace == false)
-                removeNamespceFolders();
+            /*if (UseNamespace == false)
+                removeNamespceFolders();*/
 
         }
 
@@ -123,6 +124,15 @@ namespace Babbitt.Tools.Editor
             PrefabUtility.SaveAsPrefabAsset(systemsPrefab, path);
 
             DestroyImmediate(systemsPrefab);
+        }
+
+        void InitializeInputFolder(string path)
+        {
+            InputActionAsset inputAction = new InputActionAsset();
+            inputAction.name = "GameInput";
+
+            AssetDatabase.CreateAsset(inputAction, $"{path}/{inputAction.name}.inputactions");
+            
         }
     }
 }
