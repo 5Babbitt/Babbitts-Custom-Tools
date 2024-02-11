@@ -1,0 +1,15 @@
+{
+    "name": "com.5babbittgames.babbitts-custom-tools",
+    "displayName": "Babbitts Vustom Tools",
+    "version": "0.0.1",
+    "unity": "2020.3",
+    "description": "",
+    "dependencies": {
+      "com.unity.inputsystem" : "~1.7.0"  
+    },
+    "author": {
+      "name": "Owen Harbert",
+      "email": "5babbittgames@gmail.com",
+      "url": ""
+    }
+}

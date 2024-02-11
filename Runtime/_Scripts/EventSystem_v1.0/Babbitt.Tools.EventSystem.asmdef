@@ -1,0 +1,16 @@
+{
+    "name": "Babbitt.Tools.EventSystem",
+    "rootNamespace": "Babbitt.Tools",
+    "references": [
+        "GUID:9d28bf6403728754fa12436c34dbd445"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
