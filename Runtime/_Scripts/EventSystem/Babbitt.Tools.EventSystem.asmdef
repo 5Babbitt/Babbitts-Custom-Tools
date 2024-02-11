@@ -1,9 +1,7 @@
 {
-    "name": "Babbitt.Tools.Utils",
+    "name": "Babbitt.Tools.EventSystem",
     "rootNamespace": "Babbitt.Tools",
-    "references": [
-        "GUID:9d28bf6403728754fa12436c34dbd445"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

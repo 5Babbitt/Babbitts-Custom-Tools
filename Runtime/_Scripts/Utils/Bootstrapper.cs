@@ -7,7 +7,7 @@ namespace Babbitt.Tools.Utils
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void Execute()
         {
-            Object.DontDestroyOnLoad(Object.Instantiate(Resources.Load("Systems")));
+            DontDestroyOnLoad(Instantiate(Resources.Load("Systems")));
         }
     }
 }
