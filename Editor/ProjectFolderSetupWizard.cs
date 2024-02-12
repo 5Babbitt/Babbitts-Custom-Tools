@@ -69,8 +69,8 @@ namespace Babbitt.Tools.Editor
                     SFGUID = newFolderPath;
                 if (folder == "Resources")
                     InitializeResourcesFolder(newFolderPath);
-                if (folder == "Input")
-                    InitializeInputFolder(newFolderPath);
+/*                if (folder == "Input")
+                    InitializeInputFolder(newFolderPath);*/
             }
 
             AssetDatabase.Refresh();
@@ -91,8 +91,8 @@ namespace Babbitt.Tools.Editor
         {
             if (UseNamespace == true)
                 addNamespaceFolders();
-            /*if (UseNamespace == false)
-                removeNamespceFolders();*/
+            if (UseNamespace == false)
+                removeNamespceFolders();
 
         }
 
@@ -128,10 +128,12 @@ namespace Babbitt.Tools.Editor
 
         void InitializeInputFolder(string path)
         {
-            InputActionAsset inputAction = new InputActionAsset();
+            // Set Code to instead move the existing Input Actions Asset to the right folder
+            
+            /*InputActionAsset inputAction = new InputActionAsset();
             inputAction.name = "GameInput";
 
-            AssetDatabase.CreateAsset(inputAction, $"{path}/{inputAction.name}.inputactions");
+            AssetDatabase.CreateAsset(inputAction, $"{path}/{inputAction.name}.asset");*/
             
         }
     }
