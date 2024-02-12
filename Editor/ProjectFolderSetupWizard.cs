@@ -46,6 +46,11 @@ namespace Babbitt.Tools.Editor
     {
         public bool UseNamespace = false;
         private string SFGUID;
+
+        string packageInputPath = "Packages/com.5babbittgames.babbitts-custom-tools/Runtime/_Scripts/Input";
+        string inputActionAsset = "/GameInput.inputactions";
+        string inputActionScript = "/GameInput.cs";
+
         public List<string> nsFolders = new List<string>();
         public List<string> folders = new List<string>() { "Scenes", "_Scripts", "Animation", "Audio", "Materials", "Meshes", "Prefabs", "Resources", "Textures", "Sprites", "Input", "GameEvents" };
        
@@ -69,8 +74,8 @@ namespace Babbitt.Tools.Editor
                     SFGUID = newFolderPath;
                 if (folder == "Resources")
                     InitializeResourcesFolder(newFolderPath);
-/*                if (folder == "Input")
-                    InitializeInputFolder(newFolderPath);*/
+                if (folder == "Input")
+                    InitializeInputFolder(newFolderPath);
             }
 
             AssetDatabase.Refresh();
@@ -126,15 +131,12 @@ namespace Babbitt.Tools.Editor
             DestroyImmediate(systemsPrefab);
         }
 
+        // Moves the existing Input Actions Asset to the created Input folder
         void InitializeInputFolder(string path)
         {
-            // Set Code to instead move the existing Input Actions Asset to the right folder
-            
-            /*InputActionAsset inputAction = new InputActionAsset();
-            inputAction.name = "GameInput";
+            AssetDatabase.MoveAsset(packageInputPath + inputActionAsset, path + inputActionAsset);
+            AssetDatabase.MoveAsset(packageInputPath + inputActionScript, path + inputActionScript);
 
-            AssetDatabase.CreateAsset(inputAction, $"{path}/{inputAction.name}.asset");*/
-            
         }
     }
 }
