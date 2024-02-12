@@ -47,7 +47,7 @@ namespace Babbitt.Tools.Editor
         public bool UseNamespace = false;
         private string SFGUID;
 
-        string packageInputPath = "Packages/com.5babbittgames.babbitts-custom-tools/Runtime/Input/InputAssetTemplate.inputactions";
+        string packageInputPath = "Packages/com.5babbittgames.babbitts-custom-tools/Runtime/Input/GameInput.inputactions";
 
         public List<string> nsFolders = new List<string>();
         public List<string> folders = new List<string>() { "Scenes", "_Scripts", "Animation", "Audio", "Materials", "Meshes", "Prefabs", "Resources", "Textures", "Sprites", "Input", "GameEvents" };
@@ -134,6 +134,7 @@ namespace Babbitt.Tools.Editor
         {
             //AssetDatabase.CopyAsset(packageInputPath, path + "/GameInput.inputactions");
             FileUtil.MoveFileOrDirectory(packageInputPath, path + "/GameInput.inputactions");
+            //FileUtil.MoveFileOrDirectory(packageInputPath, path + "/GameInput.cs");
 
             //AssetDatabase.CopyAsset("Packages/Babbitts-Custom-Tools/Runtime/Input/GameInput.inputactions", path + "/GameInput.inputactions");
             //AssetDatabase.MoveAsset(inputActionScriptPath, path + "/GameInput.cs");
