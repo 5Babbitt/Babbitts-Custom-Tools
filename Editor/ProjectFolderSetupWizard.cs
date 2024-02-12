@@ -135,6 +135,8 @@ namespace Babbitt.Tools.Editor
         void InitializeInputFolder(string path)
         {
             AssetDatabase.CopyAsset("Packages/com.5babbittgames.babbitts-custom-tools/Runtime/Input/GameInput.inputactions", path + "/GameInput.inputactions");
+            AssetDatabase.DeleteAsset("Packages/com.5babbittgames.babbitts-custom-tools/Runtime/Input/GameInput.inputactions");
+            AssetDatabase.DeleteAsset("Packages/com.5babbittgames.babbitts-custom-tools/Runtime/Input/GameInput.cs");
             //AssetDatabase.CopyAsset("Packages/Babbitts-Custom-Tools/Runtime/Input/GameInput.inputactions", path + "/GameInput.inputactions");
             //AssetDatabase.MoveAsset(inputActionScriptPath, path + "/GameInput.cs");
 
