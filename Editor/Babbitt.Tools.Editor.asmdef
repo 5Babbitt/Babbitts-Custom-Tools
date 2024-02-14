@@ -1,8 +1,9 @@
 {
-    "name": "Babbitt.Tools.Editor",
+    "name": "Babbitt.Tools.Editors",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:9d28bf6403728754fa12436c34dbd445"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

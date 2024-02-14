@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEditor;
 
-namespace Babbitt.Tools.Editor
+namespace Babbitt.Tools.Editors
 {
     // This script has been extended by Babbitt for personal use if you manage to get your hands on this and want the original it can be found using the link below
     // https://forum.unity.com/threads/project-folder-auto-creation-script-c.268367/
@@ -44,12 +44,8 @@ namespace Babbitt.Tools.Editor
 
     public class ProjectFolderSetupWizard : ScriptableWizard
     {
-        public bool UseNamespace = false;
-        private string SFGUID;
-
         string packageInputPath = "Packages/com.5babbittgames.babbitts-custom-tools/Runtime/Input";
 
-        public List<string> nsFolders = new List<string>();
         public List<string> folders = new List<string>() { "Scenes", "_Scripts", "Animation", "Audio", "Materials", "Meshes", "Prefabs", "Resources", "Textures", "Sprites", "Input", "GameEvents" };
        
         [MenuItem("Edit/Create Project Folders...")]
@@ -61,15 +57,11 @@ namespace Babbitt.Tools.Editor
         //Create button click
         void OnWizardCreate()
         {
-
             //create all the folders required in a project
-            //primary and sub folders
             foreach (string folder in folders)
             {
                 string guid = AssetDatabase.CreateFolder("Assets", folder);
                 string newFolderPath = AssetDatabase.GUIDToAssetPath(guid);
-                if (folder == "Scripts")
-                    SFGUID = newFolderPath;
                 if (folder == "Resources")
                     InitializeResourcesFolder(newFolderPath);
                 if (folder == "Input")
@@ -77,45 +69,12 @@ namespace Babbitt.Tools.Editor
             }
 
             AssetDatabase.Refresh();
-            if (UseNamespace == true)
-            {
-                foreach (string nsf in nsFolders)
-                {
-                    //AssetDatabase.Contain
-                    string guid = AssetDatabase.CreateFolder("Assets/Scripts", nsf);
-                    string newFolderPath = AssetDatabase.GUIDToAssetPath(guid);
-
-                }
-            }
         }
 
         //Runs whenever something changes in the editor window...
         void OnWizardUpdate()
         {
-            if (UseNamespace == true)
-                addNamespaceFolders();
-            if (UseNamespace == false)
-                removeNamespceFolders();
-
-        }
-
-        void addNamespaceFolders()
-        {
-            if (!nsFolders.Contains("Interfaces"))
-                nsFolders.Add("Interfaces");
-
-            if (!nsFolders.Contains("Classes"))
-                nsFolders.Add("Classes");
-
-            if (!nsFolders.Contains("States"))
-                nsFolders.Add("States");
-
-            // (nsFolders);
-        }
-
-        void removeNamespceFolders()
-        {
-            if (nsFolders.Count > 0) nsFolders.Clear();
+            
         }
 
         // Add the Systems prefab, which is used by the Bootstrapper, to the Resources Folder
@@ -135,14 +94,10 @@ namespace Babbitt.Tools.Editor
             AssetDatabase.CopyAsset(packageInputPath + "/GameInput.inputactions", path + "/GameInput.inputactions");
             AssetDatabase.CopyAsset(packageInputPath + "/InputManager.cs", path + "/InputManager.cs");
             AssetDatabase.CopyAsset(packageInputPath + "/InputReader.cs", path + "/InputReader.cs");
-            //FileUtil.MoveFileOrDirectory(packageInputPath, path + "/GameInput.inputactions");
+
             FileUtil.DeleteFileOrDirectory(packageInputPath);
-            //FileUtil.MoveFileOrDirectory(packageInputPath, path + "/GameInput.cs");
 
-            //AssetDatabase.CopyAsset("Packages/Babbitts-Custom-Tools/Runtime/Input/GameInput.inputactions", path + "/GameInput.inputactions");
-            //AssetDatabase.MoveAsset(inputActionScriptPath, path + "/GameInput.cs");
-
-            Debug.Log("Input Asset Created");
+            AssetDatabase.Refresh();
         }
     }
 }
