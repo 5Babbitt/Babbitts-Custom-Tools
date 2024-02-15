@@ -1,21 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class MathUtils
-{
-    public static Quaternion ShortestRotation(Quaternion to, Quaternion from)
+namespace Babbitt.Tools.Utils
+{ 
+    public class MathUtils
     {
-        if (Quaternion.Dot(to, from) < 0)
+        public static Quaternion ShortestRotation(Quaternion to, Quaternion from)
         {
-            return to * Quaternion.Inverse(Multiply(from, -1));
+            if (Quaternion.Dot(to, from) < 0)
+            {
+                return to * Quaternion.Inverse(Multiply(from, -1));
+            }
+
+            else return to * Quaternion.Inverse(from);
         }
 
-        else return to * Quaternion.Inverse(from);
-    }
+        public static Quaternion Multiply(Quaternion input, float scalar)
+        {
+            return new Quaternion(input.x * scalar, input.y * scalar, input.z * scalar, input.w * scalar);
+        }
 
-    public static Quaternion Multiply(Quaternion input, float scalar)
-    {
-        return new Quaternion(input.x * scalar, input.y * scalar, input.z * scalar, input.w * scalar);
     }
-
 }
 
