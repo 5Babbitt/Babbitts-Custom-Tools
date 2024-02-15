@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Babbitt.Tools.Utils
+namespace Babbitt.Tools
 { 
     public class MathUtils
     {

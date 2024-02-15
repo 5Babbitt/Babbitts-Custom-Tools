@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Babbitt.Tools.EventSystem
+namespace Babbitt.Tools
 { 
     [System.Serializable]
     public class CustomGameEvent : UnityEvent<Component, object> {}

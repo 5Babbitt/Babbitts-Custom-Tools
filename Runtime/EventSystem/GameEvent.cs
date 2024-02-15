@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Babbitt.Tools.EventSystem
+namespace Babbitt.Tools
 {
     [CreateAssetMenu(menuName="GameEvent")]
     public class GameEvent : ScriptableObject

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Babbitt.Tools.Utils
+namespace Babbitt.Tools
 {
     public class TimerUtils
     {

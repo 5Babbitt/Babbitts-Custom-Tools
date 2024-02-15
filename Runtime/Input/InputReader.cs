@@ -1,8 +1,7 @@
-using Babbitt.Tools.EventSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Babbitt.Tools.Input 
+namespace Babbitt.Tools 
 {
     [CreateAssetMenu(menuName = "Input Reader")]
     public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IUIActions
@@ -19,6 +18,11 @@ namespace Babbitt.Tools.Input
         [Header("UI Events")]
         [Tooltip("Events for input actions that take place when in menu's, e.g Resume, Tabbing menu items, arrow keys to increase numbers, etc...")]
         public GameEvent ResumeInputEvent;
+
+        [Header("Input Settings")]
+        [Tooltip("Settings for the starting and current input mapping")]
+        public InputMaps defaultInputMap;
+        [HideInInspector] public InputMaps currentInputMap;
 
         // Only executes if there is a reference to the scriptable object in the scene
         private void OnEnable()
@@ -39,19 +43,38 @@ namespace Babbitt.Tools.Input
         #region Action Maps
         public void SetStartingControlScheme()
         {
-            SetUI();
+            switch (defaultInputMap)
+            {
+                case InputMaps.Gameplay:
+                    SetGameplay();
+                    return;
+                case InputMaps.UI:
+                    SetUI();
+                    return;
+                default:
+                    SetGameplay();
+                    break;
+            }
+
+            currentInputMap = defaultInputMap;
         }
 
+        [ExecuteInEditMode]
         public void SetGameplay()
         {
             gameInput.Gameplay.Enable();
             gameInput.UI.Disable();
+
+            currentInputMap = InputMaps.Gameplay;
         }
 
+        [ExecuteInEditMode]
         public void SetUI()
         {
             gameInput.UI.Enable();
             gameInput.Gameplay.Disable();
+
+            currentInputMap = InputMaps.UI;
         }
         #endregion
 
@@ -83,5 +106,11 @@ namespace Babbitt.Tools.Input
                 ResumeInputEvent.Raise();
         }
         #endregion
+    }
+
+    public enum InputMaps
+    { 
+        Gameplay,
+        UI
     }
 }
