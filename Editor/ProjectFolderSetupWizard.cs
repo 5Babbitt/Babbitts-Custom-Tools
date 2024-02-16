@@ -60,16 +60,12 @@ namespace Babbitt.Tools.Editors
             //create all the folders required in a project
             foreach (string folder in folders)
             {
-                if (folder == "Input")
-                {
-                    InitializeInputFolder("Assets/Input");
-                    return;
-                }
-
                 string guid = AssetDatabase.CreateFolder("Assets", folder);
                 string newFolderPath = AssetDatabase.GUIDToAssetPath(guid);
                 if (folder == "Resources")
                     InitializeResourcesFolder(newFolderPath);
+                if (folder == "Input")
+                    InitializeInputFolder("Assets/Input");
             }
 
             AssetDatabase.Refresh();
@@ -99,7 +95,7 @@ namespace Babbitt.Tools.Editors
             AssetDatabase.CopyAsset(packageInputPath + "/InputManager.cs", path + "/InputManager.cs");
             AssetDatabase.CopyAsset(packageInputPath + "/InputReader.cs", path + "/InputReader.cs");
             AssetDatabase.CopyAsset("Packages/com.5babbittgames.babbitts-custom-tools/Editor/InputReaderEditor.cs", path + "/Editor/InputReaderEditor.cs");*/
-            FileUtil.MoveFileOrDirectory(packageInputPath, path);
+            FileUtil.ReplaceDirectory(packageInputPath, path);
             AssetDatabase.CreateFolder("Assets/Input", "Editor");
 
             FileUtil.MoveFileOrDirectory("Packages/com.5babbittgames.babbitts-custom-tools/Editor/InputReaderEditor.cs", path + "/Editor/InputReaderEditor.cs");

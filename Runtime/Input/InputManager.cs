@@ -1,8 +1,7 @@
-namespace Babbitt.Tools
-{ 
-    public class InputManager : Singleton<InputManager>
-    {
-        // This class exists solely to always have a reference to the input reader throughout the game
-        public InputReader inputReader;
-    }
+using Babbitt.Tools;
+
+public class InputManager : Singleton<InputManager>
+{
+    // This class exists solely to always have a reference to the input reader throughout the game
+    public InputReader inputReader;
 }
