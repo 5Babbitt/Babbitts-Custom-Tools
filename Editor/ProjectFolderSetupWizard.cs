@@ -100,7 +100,7 @@ namespace Babbitt.Tools.Editors
             AssetDatabase.CopyAsset(packageInputPath + "/InputReader.cs", path + "/InputReader.cs");
             AssetDatabase.CopyAsset("Packages/com.5babbittgames.babbitts-custom-tools/Editor/InputReaderEditor.cs", path + "/Editor/InputReaderEditor.cs");*/
             FileUtil.MoveFileOrDirectory(packageInputPath, path);
-            FileUtil.MoveFileOrDirectory("Packages/com.5babbittgames.babbitts-custom-tools/Editor/InputReaderEditor.cs", path + "/Editor");
+            FileUtil.MoveFileOrDirectory("Packages/com.5babbittgames.babbitts-custom-tools/Editor/InputReaderEditor.cs", path + "/Editor/InputReaderEditor.cs");
 
             //FileUtil.DeleteFileOrDirectory(packageInputPath);
 
