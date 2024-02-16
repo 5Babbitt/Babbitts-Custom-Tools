@@ -46,7 +46,7 @@ namespace Babbitt.Tools.Editors
     {
         string packageInputPath = "Packages/com.5babbittgames.babbitts-custom-tools/Runtime/Input";
 
-        public List<string> folders = new List<string>() { "Scenes", "_Scripts", "Animation", "Audio", "Materials", "Meshes", "Prefabs", "Resources", "Textures", "Sprites", "Input", "GameEvents" };
+        public List<string> folders = new List<string>() { "Scenes", "_Scripts", "Animation", "Audio", "Materials", "Meshes", "Prefabs", "Resources", "Textures", "Sprites", "GameEvents" };
        
         [MenuItem("Edit/Create Project Folders...")]
         static void CreateWizard()
@@ -64,8 +64,6 @@ namespace Babbitt.Tools.Editors
                 string newFolderPath = AssetDatabase.GUIDToAssetPath(guid);
                 if (folder == "Resources")
                     InitializeResourcesFolder(newFolderPath);
-                if (folder == "Input")
-                    InitializeInputFolder("Assets/Input");
             }
 
             AssetDatabase.Refresh();
