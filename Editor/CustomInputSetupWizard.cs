@@ -5,7 +5,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Babbitt.Tools.Editor
+namespace Babbitt.Tools.Editors
 {
     public class CustomInputSetupWizard : ScriptableWizard
     {
