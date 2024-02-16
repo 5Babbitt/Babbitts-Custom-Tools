@@ -91,9 +91,11 @@ namespace Babbitt.Tools.Editors
         // Moves the existing Input Actions Asset to the created Input folder
         void InitializeInputFolder(string path)
         {
-            AssetDatabase.CopyAsset(packageInputPath + "/GameInput.inputactions", path + "/GameInput.inputactions");
+            /*AssetDatabase.CopyAsset(packageInputPath + "/GameInput.inputactions", path + "/GameInput.inputactions");
             AssetDatabase.CopyAsset(packageInputPath + "/InputManager.cs", path + "/InputManager.cs");
             AssetDatabase.CopyAsset(packageInputPath + "/InputReader.cs", path + "/InputReader.cs");
+            AssetDatabase.CopyAsset("Packages/com.5babbittgames.babbitts-custom-tools/Editor/InputReaderEditor.cs", path + "/Editor/InputReaderEditor.cs");*/
+            FileUtil.MoveFileOrDirectory(packageInputPath, path);
 
             FileUtil.DeleteFileOrDirectory(packageInputPath);
 
