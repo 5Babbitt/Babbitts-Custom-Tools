@@ -60,12 +60,16 @@ namespace Babbitt.Tools.Editors
             //create all the folders required in a project
             foreach (string folder in folders)
             {
+                if (folder == "Input")
+                {
+                    InitializeInputFolder("Assets/Input");
+                    return;
+                }
+
                 string guid = AssetDatabase.CreateFolder("Assets", folder);
                 string newFolderPath = AssetDatabase.GUIDToAssetPath(guid);
                 if (folder == "Resources")
                     InitializeResourcesFolder(newFolderPath);
-                if (folder == "Input")
-                    InitializeInputFolder(newFolderPath);
             }
 
             AssetDatabase.Refresh();
