@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Babbitt.Tools
+namespace FiveBabbittGames
 { 
     public class MathUtils
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace Babbitt.Tools
+namespace FiveBabbittGames
 {
     // A static instance is similar to a singleton but does not destroy any new instances,
     // Instead overwriting the current existing instance.
