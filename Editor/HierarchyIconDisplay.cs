@@ -3,7 +3,7 @@ using UnityEditor;
 using System;
 using System.Linq;
 
-namespace FiveBabbittGames
+namespace FiveBabbittGames.Editors
 {
     [InitializeOnLoad]
     public static class HierarchyIconDisplay

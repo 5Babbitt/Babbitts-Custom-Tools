@@ -1,0 +1,17 @@
+using UnityEngine;
+
+    #ROOTNAMESPACEBEGIN#
+/// <summary>
+/// #NAME#
+/// </summary>
+public class #SCRIPTNAME# : Singleton<#SCRIPTNAME#>
+{
+    
+    
+    protected override void Awake()
+    {
+        base.Awake();
+
+    }
+}
+#ROOTNAMESPACEEND#

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace FiveBabbittGames
+namespace FiveBabbittGames.Editors
 {
     public static class UnityEditorBackgroundColor
     {
