@@ -7,10 +7,12 @@ namespace FiveBabbittGames.Editors
 {
     public static class CreateScriptTemplates
     {
+        static string packagePath = "Packages/com.5babbittgames.babbitts-custom-tools/Editor/Templates/";
+
         [MenuItem("Assets/Create/Code/MonoBehaviour", priority = 10)]
         public static void CreateMonobehaviourMenuItem()
         {
-            string templatePath = "Packages/<package-name>/Editor/Templates/Monobehaviour.cs.txt";
+            string templatePath = packagePath + "Monobehaviour.cs.txt";
 
             ProjectWindowUtil.CreateScriptAssetFromTemplateFile(templatePath, "NewScript.cs");
         }
