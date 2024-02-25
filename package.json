@@ -1,7 +1,7 @@
 {
     "name": "com.5babbittgames.babbitts-custom-tools",
     "displayName": "Babbitts Custom Tools",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "unity": "2020.3",
     "description": "A suite of my own custom tools that I like to make use of in my own development environment",
     "dependencies": {

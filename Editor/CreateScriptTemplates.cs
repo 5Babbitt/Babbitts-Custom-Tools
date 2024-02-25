@@ -20,7 +20,7 @@ namespace FiveBabbittGames.Editors
         [MenuItem("Assets/Create/Code/Singleton", priority = 10)]
         public static void CreateSingletonMenuItem()
         {
-            string templatePath = "Assets/Tools-Development-Project/_Scripts/Templates/Singleton.cs.txt";
+            string templatePath = packagePath + "Singleton.cs.txt";
 
             ProjectWindowUtil.CreateScriptAssetFromTemplateFile(templatePath, "NewSingletonScript.cs");
         }
@@ -28,7 +28,7 @@ namespace FiveBabbittGames.Editors
         [MenuItem("Assets/Create/Code/ScriptableObject", priority = 10)]
         public static void CreateScriptableObjectMenuItem()
         {
-            string templatePath = "Assets/Tools-Development-Project/_Scripts/Templates/ScriptableObject.cs.txt";
+            string templatePath = packagePath + "ScriptableObject.cs.txt";
 
             ProjectWindowUtil.CreateScriptAssetFromTemplateFile(templatePath, "NewScriptableObject.cs");
         }
@@ -36,7 +36,7 @@ namespace FiveBabbittGames.Editors
         [MenuItem("Assets/Create/Code/Editor", priority = 10)]
         public static void CreateEditorMenuItem()
         {
-            string templatePath = "Assets/Tools-Development-Project/_Scripts/Templates/Editor.cs.txt";
+            string templatePath = packagePath + "Editor.cs.txt";
 
             ProjectWindowUtil.CreateScriptAssetFromTemplateFile(templatePath, "NewEditorScript.cs");
         }
@@ -44,7 +44,7 @@ namespace FiveBabbittGames.Editors
         [MenuItem("Assets/Create/Code/Class", priority = 10)]
         public static void CreatClassMenuItem()
         {
-            string templatePath = "Assets/Tools-Development-Project/_Scripts/Templates/Class.cs.txt";
+            string templatePath = packagePath + "Class.cs.txt";
 
             ProjectWindowUtil.CreateScriptAssetFromTemplateFile(templatePath, "NewC#Class.cs");
         }
@@ -52,7 +52,7 @@ namespace FiveBabbittGames.Editors
         [MenuItem("Assets/Create/Code/Interface", priority = 10)]
         public static void CreatInterfaceMenuItem()
         {
-            string templatePath = "Assets/Tools-Development-Project/_Scripts/Templates/Interface.cs.txt";
+            string templatePath = packagePath + "Interface.cs.txt";
 
             ProjectWindowUtil.CreateScriptAssetFromTemplateFile(templatePath, "NewInterface.cs");
         }
