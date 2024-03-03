@@ -44,8 +44,8 @@ namespace FiveBabbittGames
         }
 
         /// <summary>
-        /// Clamp an angle between the desired origin and the clamp angle in either direction.
-        /// This can be ignored is isAngleClamped is set to false
+        /// Clamp an angle between the desired origin and the clamp angle in either direction
+        /// This will be ignored if isAngleClamped is set to false
         /// </summary>
         /// <param name="angle"></param>
         /// <param name="originAngle"></param>
@@ -59,6 +59,83 @@ namespace FiveBabbittGames
 
             return angle;
         }
+
+        /// <summary>
+        /// Invert a Vector3 along the desired axis/axes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="axis"></param>
+        /// <returns></returns>
+        public static Vector3 InvertVector3(Vector3 input, InvertAxis axis)
+        {
+            var invertVector = Vector3.one;
+
+            switch (axis)
+            {
+                case InvertAxis.x:
+                    invertVector.x = -1;
+                    break;
+                case InvertAxis.y:
+                    invertVector.y = -1;
+                    break;
+                case InvertAxis.z:
+                    invertVector.z = -1;
+                    break;
+                case InvertAxis.xy:
+                    invertVector.x = -1;
+                    invertVector.y = -1;
+                    break;
+                case InvertAxis.xz:
+                    invertVector.x = -1;
+                    invertVector.z = -1;
+                    break;
+                case InvertAxis.yz:
+                    invertVector.y = -1;
+                    invertVector.z = -1;
+                    break;
+            }
+
+            var output = Vector3.Scale(input, invertVector);
+
+            return output;
+        }
+
+
+        /// <summary>
+        /// Invert a Vector2 along the desired axis
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="axis"></param>
+        /// <returns></returns>
+        public static Vector2 InvertVector2(Vector2 input, InvertAxis axis)
+        {
+            var invertVector = Vector2.one;
+
+            switch (axis)
+            {
+                case InvertAxis.x:
+                    invertVector.x = -1;
+                    break;
+                case InvertAxis.y:
+                    invertVector.y = -1;
+                    break;
+            }
+
+            var output = Vector2.Scale(input, invertVector);
+
+            return output;
+        }
+    }
+
+    public enum InvertAxis
+    { 
+        x,
+        y,
+        z,
+        xy,
+        xz,
+        yz
     }
 }
+
 
