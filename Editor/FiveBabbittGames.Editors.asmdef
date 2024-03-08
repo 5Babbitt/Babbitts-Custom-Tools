@@ -1,7 +1,9 @@
 {
     "name": "FiveBabbittGames.Editors",
-    "rootNamespace": "FiveBabbittGames.Editor",
-    "references": [],
+    "rootNamespace": "FiveBabbittGames.Editors",
+    "references": [
+        "GUID:9d28bf6403728754fa12436c34dbd445"
+    ],
     "includePlatforms": [
         "Android",
         "EmbeddedLinux",
