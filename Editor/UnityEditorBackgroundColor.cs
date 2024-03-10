@@ -1,42 +1,40 @@
-#if UNITY_EDITOR
-    using UnityEditor;
-    using UnityEngine;
+using UnityEditor;
+using UnityEngine;
     
-    namespace FiveBabbittGames.Editors
+namespace FiveBabbittGames.Editors
+{
+    public static class UnityEditorBackgroundColor
     {
-        public static class UnityEditorBackgroundColor
+    
+        static readonly Color defaultColor = new Color(0.2196f, 0.2196f, 0.2196f);
+    
+        static readonly Color selectedColor = new Color(0.1725f, 0.3647f, 0.5294f);
+    
+        static readonly Color selectedUnfocusedColor = new Color(0.3f, 0.3f, 0.3f);
+    
+        static readonly Color hoveredColor = new Color(0.2706f, 0.2706f, 0.2706f);
+    
+        public static Color Get(bool isSelected, bool isHovered, bool isWindowFocused)
         {
-    
-            static readonly Color defaultColor = new Color(0.2196f, 0.2196f, 0.2196f);
-    
-            static readonly Color selectedColor = new Color(0.1725f, 0.3647f, 0.5294f);
-    
-            static readonly Color selectedUnfocusedColor = new Color(0.3f, 0.3f, 0.3f);
-    
-            static readonly Color hoveredColor = new Color(0.2706f, 0.2706f, 0.2706f);
-    
-            public static Color Get(bool isSelected, bool isHovered, bool isWindowFocused)
+            if (isSelected)
             {
-                if (isSelected)
+                if (isWindowFocused)
                 {
-                    if (isWindowFocused)
-                    {
-                        return selectedColor;
-                    }
-                    else
-                    {
-                        return selectedUnfocusedColor;
-                    }
-                }
-                else if (isHovered)
-                {
-                    return hoveredColor;
+                    return selectedColor;
                 }
                 else
                 {
-                    return defaultColor;
+                    return selectedUnfocusedColor;
                 }
+            }
+            else if (isHovered)
+            {
+                return hoveredColor;
+            }
+            else
+            {
+                return defaultColor;
             }
         }
     }
-#endif
+}
