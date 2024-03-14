@@ -14,7 +14,7 @@ namespace FiveBabbittGames
         protected virtual void OnApplicationQuit()
         {
             Instance = null;
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 
@@ -23,9 +23,9 @@ namespace FiveBabbittGames
     {
         protected override void Awake()
         {
-            if (Instance != null) 
+            if (Instance != null && Instance != this) 
             {
-                Destroy(gameObject);
+                Destroy(this);
                 return;
             }
 
