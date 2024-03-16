@@ -9,13 +9,14 @@ namespace FiveBabbittGames
 
         protected virtual void Awake()
         {
-            if (Instance == null)
-                Instance = this as T;
-
             if (Instance != null && Instance != this) 
             {
                 Destroy(gameObject);
                 return;
+            }
+            else
+            {
+                Instance = this as T;
             }
         }
 
@@ -23,19 +24,6 @@ namespace FiveBabbittGames
         {
             Instance = null;
             Destroy(gameObject);
-        }
-
-    }
-
-    // Persistant version of a singleton. Will not be destroyed when loading a new scene.
-    // Ideal for systems that require persistant data or operating while scene loading.
-    public abstract class SingletonPersistent<T> : Singleton<T> where T : MonoBehaviour
-    {
-        protected override void Awake()
-        {
-            base.Awake();
-
-            DontDestroyOnLoad(gameObject);
         }
     }
 }
