@@ -21,16 +21,17 @@ namespace FiveBabbittGames
             EState nextStateKey = CurrentState.GetNextState();
 
             
-            if (!isTransitioningState)
+            if (isTransitioningState) 
+                return;
+            
+            if (nextStateKey.Equals(CurrentState.Statekey))
             {
-                if (nextStateKey.Equals(CurrentState.Statekey))
-                {
-                    CurrentState.UpdateState();
-                    return;
-                }
-
-                TransitionToState(nextStateKey);
+                CurrentState.UpdateState();
+                return;
             }
+
+            TransitionToState(nextStateKey);
+          
         }
 
         public void TransitionToState(EState stateKey)
