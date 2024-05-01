@@ -25,13 +25,9 @@ namespace FiveBabbittGames
                 return;
             
             if (nextStateKey.Equals(CurrentState.Statekey))
-            {
                 CurrentState.UpdateState();
-                return;
-            }
-
-            TransitionToState(nextStateKey);
-          
+            else
+                TransitionToState(nextStateKey);
         }
 
         public void TransitionToState(EState stateKey)
