@@ -1,15 +1,11 @@
 {
     "name": "com.5babbittgames.babbitts-custom-tools",
     "displayName": "Babbitts Custom Tools",
-    "version": "1.7.4",
+    "version": "1.8.0",
     "unity": "2020.3",
     "description": "A suite of my own custom tools that I like to make use of in my own development environment",
-    "dependencies": {
-      "com.unity.inputsystem" : "~1.7.0"  
-    },
     "author": {
       "name": "Owen Harbert",
-      "email": "5babbittgames@gmail.com",
-      "url": ""
+      "email": "5babbittgames@gmail.com"
     }
 }
