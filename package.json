@@ -1,8 +1,8 @@
 {
     "name": "com.5babbittgames.babbitts-custom-tools",
     "displayName": "Babbitts Custom Tools",
-    "version": "1.8.0",
-    "unity": "2020.3",
+    "version": "1.9.0",
+    "unity": "2021.3",
     "description": "A suite of my own custom tools that I like to make use of in my own development environment",
     "author": {
       "name": "Owen Harbert",
