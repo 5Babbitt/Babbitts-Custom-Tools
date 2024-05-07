@@ -1,7 +1,10 @@
 {
     "name": "FiveBabbittGames",
     "rootNamespace": "FiveBabbittGames",
-    "references": [],
+    "references": [
+        "GUID:caca889fed6088d40b22c2d7e2909c31",
+        "GUID:69518689ee43e43439e85b2232f66f27"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
