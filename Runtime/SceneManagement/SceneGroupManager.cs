@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SpiritSkies
+namespace FiveBabbittGames
 {
     /// <summary>
     /// SceneGroupManage

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SpiritSkies
+namespace FiveBabbittGames
 {
     /// <summary>
     /// SceneLoader
