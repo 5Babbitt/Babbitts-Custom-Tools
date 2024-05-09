@@ -11,8 +11,8 @@ namespace FiveBabbittGames
         /// <returns></returns>
         public static string FloatToTime(float time)
         {
-            int minutes = Mathf.FloorToInt(time / 60F);
-            int seconds = Mathf.FloorToInt(time % 60F);
+            int minutes = Mathf.FloorToInt(time / 60f);
+            int seconds = Mathf.FloorToInt(time % 60f);
         
             string levelTime = minutes.ToString("00") + ":" + seconds.ToString("00");
 
@@ -26,8 +26,8 @@ namespace FiveBabbittGames
         /// <returns></returns>
         public static string FloatToExactTime(float time)
         {
-            int minutes = Mathf.FloorToInt(time / 60F);
-            int seconds = Mathf.FloorToInt(time % 60F);
+            int minutes = Mathf.FloorToInt(time / 60f);
+            int seconds = Mathf.FloorToInt(time % 60f);
             int milliseconds = Mathf.FloorToInt((time * 1000) % 1000);
         
             string levelTime = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("000");
