@@ -6,9 +6,9 @@ using UnityEngine.UI;
 namespace FiveBabbittGames
 {
     /// <summary>
-    /// SceneLoader
+    /// You add scene groups in the inspector and the scene loader handles loading and unloading the groups.
     /// </summary>
-    public class SceneLoader : MonoBehaviour
+    public class SceneLoader : Singleton<SceneLoader>
     {
         [SerializeField] Image loadingBar;
         [SerializeField] float fillSpeed = 0.5f;
@@ -21,11 +21,13 @@ namespace FiveBabbittGames
 
         public readonly SceneGroupManager manager = new SceneGroupManager();
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             manager.OnSceneLoaded += sceneName => Debug.Log($"Loaded: {sceneName}");
             manager.OnSceneUnloaded += sceneName => Debug.Log($"Unloaded: {sceneName}");
-            manager.OnSceneGroupLoaded += () => Debug.Log("Scen group loaded");
+            manager.OnSceneGroupLoaded += () => Debug.Log("Scene group loaded");
         }
 
         async void Start()

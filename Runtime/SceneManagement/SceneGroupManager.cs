@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 namespace FiveBabbittGames
 {
     /// <summary>
-    /// SceneGroupManage
+    /// Handles loading the individual scenes in a scene group based on their type and status.
     /// </summary>
     public class SceneGroupManager
     {
@@ -60,9 +60,7 @@ namespace FiveBabbittGames
             Scene activeScene = SceneManager.GetSceneByName(ActiveSceneGroup.FindSceneNameByType(SceneType.ActiveScene));
 
             if (activeScene.IsValid())
-            {
                 SceneManager.SetActiveScene(activeScene);
-            }
 
             OnSceneGroupLoaded.Invoke();
         }

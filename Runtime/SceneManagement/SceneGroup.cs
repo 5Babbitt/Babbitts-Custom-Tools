@@ -6,7 +6,7 @@ using Eflatun.SceneReference;
 namespace FiveBabbittGames
 {
     /// <summary>
-    /// SceneGroup
+    /// A List of different Scenes to be loaded additively.
     /// </summary>
     [Serializable]
     public class SceneGroup
@@ -21,7 +21,7 @@ namespace FiveBabbittGames
     }
 
     /// <summary>
-    /// Scene Data
+    /// Contains the name and type of scene for use in the Scene Group.
     /// </summary>
     [Serializable]
     public class SceneData
