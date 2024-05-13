@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 
 namespace FiveBabbittGames
 {
@@ -20,6 +23,7 @@ namespace FiveBabbittGames
         bool isLoading;
 
         public readonly SceneGroupManager manager = new SceneGroupManager();
+        public static readonly Dictionary<string, int> SceneGroupIndex = new();
 
         protected override void Awake()
         {
@@ -28,6 +32,8 @@ namespace FiveBabbittGames
             manager.OnSceneLoaded += sceneName => Debug.Log($"Loaded: {sceneName}");
             manager.OnSceneUnloaded += sceneName => Debug.Log($"Unloaded: {sceneName}");
             manager.OnSceneGroupLoaded += () => Debug.Log("Scene group loaded");
+
+            UpdateGroupDictionary();
         }
 
         async void Start()
@@ -48,7 +54,7 @@ namespace FiveBabbittGames
             loadingBar.fillAmount = Mathf.Lerp(currentFillAmount, targetProgress, Time.deltaTime * dynamicFillSpeed);
         }
 
-        private async Task LoadSceneGroup(int index)
+        public async Task LoadSceneGroup(int index)
         {
             loadingBar.fillAmount = 0;
             targetProgress = 1f;
@@ -67,6 +73,11 @@ namespace FiveBabbittGames
             EnableLoadingCanvas(false);
         }
 
+        public async Task LoadSceneGroup(string groupName)
+        {
+            await LoadSceneGroup(SceneGroupIndex[groupName]);
+        }
+
         void EnableLoadingCanvas(bool enable = true)
         {
             isLoading = enable;
@@ -74,6 +85,23 @@ namespace FiveBabbittGames
             loadingCamera.gameObject.SetActive(enable);
         }
 
+        [ContextMenu("Update Groups Index")]
+        public void UpdateGroupDictionary()
+        {
+            SceneGroupIndex.Clear();
+
+            for (int i = 0; i < sceneGroups.Length; i++)
+            {
+                SceneGroupIndex.Add(sceneGroups[i].GroupName, i);
+            }
+
+            Debug.Log("Dictionary updated");
+
+            foreach (string key in  SceneGroupIndex.Keys)
+            {
+                Debug.Log($"{key} : {SceneGroupIndex[key]}");
+            }
+        }
     }
 
     public class LoadingProgress : IProgress<float> 
@@ -87,5 +115,4 @@ namespace FiveBabbittGames
             Progressed?.Invoke(value / ratio);
         }
     }
-
 }
