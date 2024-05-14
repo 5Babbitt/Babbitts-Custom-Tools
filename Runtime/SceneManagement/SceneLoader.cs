@@ -78,6 +78,17 @@ namespace FiveBabbittGames
             await LoadSceneGroup(SceneGroupIndex[groupName]);
         }
 
+        public async void LoadSceneGroupEvent(int index)
+        {
+            await LoadSceneGroup(index);
+        }
+
+
+        public async void LoadSceneGroupEvent(string name)
+        {
+            await LoadSceneGroup(name);
+        }
+
         void EnableLoadingCanvas(bool enable = true)
         {
             isLoading = enable;
