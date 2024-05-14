@@ -3,7 +3,7 @@
     "displayName": "Babbitts Custom Tools",
     "version": "1.12.0",
     "unity": "2022.3",
-    "description": "A suite of my own custom tools that I like to make use of in my own development environment\nInstall this dependency: git+https://github.com/starikcetin/Eflatun.SceneReference.git#4.0.0",
+    "description": "A suite of my own custom tools that I like to make use of in my own development environment\nInstall the following dependencies: \n\ngit+https://github.com/starikcetin/Eflatun.SceneReference.git#4.0.0",
     "author": {
       "name": "Owen Harbert",
       "email": "5babbittgames@gmail.com",
