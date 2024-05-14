@@ -11,7 +11,7 @@ namespace FiveBabbittGames.Editors
             SceneLoader sceneLoader = (SceneLoader)target;
             if (GUILayout.Button("Update Group Index"))
             {
-                sceneLoader.UpdateGroupDictionary();
+                sceneLoader.UpdateGroupIndex();
             }
 
             base.OnInspectorGUI();

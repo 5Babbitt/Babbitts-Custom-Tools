@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using System.IO;
 
 namespace FiveBabbittGames
 {
@@ -33,7 +33,7 @@ namespace FiveBabbittGames
             manager.OnSceneUnloaded += sceneName => Debug.Log($"Unloaded: {sceneName}");
             manager.OnSceneGroupLoaded += () => Debug.Log("Scene group loaded");
 
-            UpdateGroupDictionary();
+            UpdateGroupIndex();
         }
 
         async void Start()
@@ -83,7 +83,6 @@ namespace FiveBabbittGames
             await LoadSceneGroup(index);
         }
 
-
         public async void LoadSceneGroupEvent(string name)
         {
             await LoadSceneGroup(name);
@@ -97,21 +96,42 @@ namespace FiveBabbittGames
         }
 
         [ContextMenu("Update Groups Index")]
-        public void UpdateGroupDictionary()
+        public void UpdateGroupIndex()
         {
-            SceneGroupIndex.Clear();
+            List<string> enumStrings = new();
 
             for (int i = 0; i < sceneGroups.Length; i++)
             {
-                SceneGroupIndex.Add(sceneGroups[i].GroupName, i);
+                enumStrings.Add(sceneGroups[i].GroupName);
             }
 
-            Debug.Log("Dictionary updated");
+            GenerateEnum("ESceneGroupIndex", enumStrings.ToArray());
+        }
 
-            foreach (string key in  SceneGroupIndex.Keys)
+        public void GenerateEnum(string enumName, string[] names)
+        {
+            string folderPath = $"Assets/_Scripts/Enums/";
+            string fullPath = folderPath + $"{enumName}.cs";
+
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+            
+            using (StreamWriter streamWriter = new StreamWriter(fullPath))
             {
-                Debug.Log($"{key} : {SceneGroupIndex[key]}");
+                streamWriter.Write($"public enum {enumName}\n");
+                streamWriter.Write("{\n");
+
+                for (int i = 0; i < names.Length; i++)
+                {
+                    var enumString = names[i];
+
+                    streamWriter.Write($"\t{enumString.Replace(" ", "_")} = {i},\n");
+                }
+
+                streamWriter.Write("}\n");
             }
+
+            AssetDatabase.Refresh();
         }
     }
 
