@@ -40,6 +40,11 @@ namespace FiveBabbittGames.Editors
                 return;
 
             Component component = components.Length > 1 ? components[1] : components[0];
+            
+            if (component is CanvasRenderer)
+            {
+                component = components.Length > 3 ? components[3] : components[2];
+            }
 
             Type type = component.GetType();
 
