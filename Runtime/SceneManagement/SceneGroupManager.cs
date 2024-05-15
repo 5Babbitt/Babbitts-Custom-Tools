@@ -17,13 +17,14 @@ namespace FiveBabbittGames
         public event Action OnSceneGroupLoaded = delegate { };
 
         SceneGroup ActiveSceneGroup;
+        private bool unloadActiveScene;
 
-        public async Task LoadScenes(SceneGroup group, IProgress<float> progress, bool reloadDupScenes = false)
+        public async Task LoadScenes(SceneGroup group, IProgress<float> progress, bool unloadActiveScene, bool reloadDupScenes = false)
         {
             ActiveSceneGroup = group;
             var loadedScenes = new List<string>();
 
-            await UnloadScenes();
+            await UnloadScenes(unloadActiveScene);
 
             int sceneCount = SceneManager.sceneCount;
 
@@ -44,7 +45,7 @@ namespace FiveBabbittGames
                     continue;
 
                 var operation = SceneManager.LoadSceneAsync(sceneData.Reference.Path, LoadSceneMode.Additive);
-                await Task.Delay(TimeSpan.FromSeconds(2f));
+                await Task.Delay(TimeSpan.FromSeconds(0.5f));
 
                 operationGroup.Operations.Add(operation);
 
@@ -65,9 +66,13 @@ namespace FiveBabbittGames
             OnSceneGroupLoaded.Invoke();
         }
 
-        public async Task UnloadScenes()
+        public async Task UnloadScenes(bool unloadActiveScene = false)
         {
             var scenes = new List<string>();
+
+            if (unloadActiveScene)
+                SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
+                
             var activeScene = SceneManager.GetActiveScene().name;
 
             int sceneCount = SceneManager.sceneCount;
@@ -80,6 +85,7 @@ namespace FiveBabbittGames
                     continue;    
 
                 var sceneName = sceneAt.name;
+
 
                 if (sceneName.Equals(activeScene) || sceneName == "Bootstrapper")
                     continue;

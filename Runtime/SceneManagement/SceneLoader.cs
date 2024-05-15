@@ -17,6 +17,9 @@ namespace FiveBabbittGames
         [SerializeField] float fillSpeed = 0.5f;
         [SerializeField] Canvas loadingCanvas;
         [SerializeField] Camera loadingCamera;
+
+        [Header("Scene Settings")]
+        [SerializeField] bool unloadActiveScene = true;
         [SerializeField] SceneGroup[] sceneGroups;
 
         float targetProgress;
@@ -53,7 +56,12 @@ namespace FiveBabbittGames
 
             loadingBar.fillAmount = Mathf.Lerp(currentFillAmount, targetProgress, Time.deltaTime * dynamicFillSpeed);
         }
-
+        
+        /// <summary>
+        /// Load A scene group using the index in the sceneLoader
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public async Task LoadSceneGroup(int index)
         {
             loadingBar.fillAmount = 0;
@@ -69,23 +77,18 @@ namespace FiveBabbittGames
             progress.Progressed += target => targetProgress = Mathf.Max(target, targetProgress);
 
             EnableLoadingCanvas();
-            await manager.LoadScenes(sceneGroups[index], progress);
+            await manager.LoadScenes(sceneGroups[index], progress, unloadActiveScene);
             EnableLoadingCanvas(false);
         }
 
+        /// <summary>
+        /// This is technically redundant with the ability to bake enums for the scene group names but I'll leave it just in case.
+        /// </summary>
+        /// <param name="groupName"></param>
+        /// <returns></returns>
         public async Task LoadSceneGroup(string groupName)
         {
             await LoadSceneGroup(SceneGroupIndex[groupName]);
-        }
-
-        public async void LoadSceneGroupEvent(int index)
-        {
-            await LoadSceneGroup(index);
-        }
-
-        public async void LoadSceneGroupEvent(string name)
-        {
-            await LoadSceneGroup(name);
         }
 
         void EnableLoadingCanvas(bool enable = true)
@@ -93,6 +96,11 @@ namespace FiveBabbittGames
             isLoading = enable;
             loadingCanvas.gameObject.SetActive(enable);
             loadingCamera.gameObject.SetActive(enable);
+        }
+
+        public void SetUnloadActiveScene(bool value)
+        {
+            unloadActiveScene = value;
         }
 
         [ContextMenu("Update Groups Index")]
@@ -106,6 +114,7 @@ namespace FiveBabbittGames
             }
 
             GenerateEnum("ESceneGroupIndex", enumStrings.ToArray());
+            Debug.Log("Scene Group Index Updated");
         }
 
         public void GenerateEnum(string enumName, string[] names)
