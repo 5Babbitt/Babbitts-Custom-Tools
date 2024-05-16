@@ -17,7 +17,6 @@ namespace FiveBabbittGames
         public event Action OnSceneGroupLoaded = delegate { };
 
         SceneGroup ActiveSceneGroup;
-        private bool unloadActiveScene;
 
         public async Task LoadScenes(SceneGroup group, IProgress<float> progress, bool unloadActiveScene, bool reloadDupScenes = false)
         {
@@ -45,7 +44,7 @@ namespace FiveBabbittGames
                     continue;
 
                 var operation = SceneManager.LoadSceneAsync(sceneData.Reference.Path, LoadSceneMode.Additive);
-                await Task.Delay(TimeSpan.FromSeconds(0.5f));
+                await Task.Delay(TimeSpan.FromSeconds(0.25f));
 
                 operationGroup.Operations.Add(operation);
 

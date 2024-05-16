@@ -19,14 +19,12 @@ namespace FiveBabbittGames
         [SerializeField] Camera loadingCamera;
 
         [Header("Scene Settings")]
-        [SerializeField] bool unloadActiveScene = true;
         [SerializeField] SceneGroup[] sceneGroups;
 
         float targetProgress;
         bool isLoading;
 
         public readonly SceneGroupManager manager = new SceneGroupManager();
-        public static readonly Dictionary<string, int> SceneGroupIndex = new();
 
         protected override void Awake()
         {
@@ -56,13 +54,14 @@ namespace FiveBabbittGames
 
             loadingBar.fillAmount = Mathf.Lerp(currentFillAmount, targetProgress, Time.deltaTime * dynamicFillSpeed);
         }
-        
+
         /// <summary>
         /// Load A scene group using the index in the sceneLoader
         /// </summary>
-        /// <param name="index"></param>
+        /// <param name="index">The index of the loaded scene group</param>
+        /// <param name="unloadActiveScene">If the active scene should be unloaded</param>
         /// <returns></returns>
-        public async Task LoadSceneGroup(int index)
+        public async Task LoadSceneGroup(int index, bool unloadActiveScene = false)
         {
             loadingBar.fillAmount = 0;
             targetProgress = 1f;
@@ -81,26 +80,11 @@ namespace FiveBabbittGames
             EnableLoadingCanvas(false);
         }
 
-        /// <summary>
-        /// This is technically redundant with the ability to bake enums for the scene group names but I'll leave it just in case.
-        /// </summary>
-        /// <param name="groupName"></param>
-        /// <returns></returns>
-        public async Task LoadSceneGroup(string groupName)
-        {
-            await LoadSceneGroup(SceneGroupIndex[groupName]);
-        }
-
         void EnableLoadingCanvas(bool enable = true)
         {
             isLoading = enable;
             loadingCanvas.gameObject.SetActive(enable);
             loadingCamera.gameObject.SetActive(enable);
-        }
-
-        public void SetUnloadActiveScene(bool value)
-        {
-            unloadActiveScene = value;
         }
 
         [ContextMenu("Update Groups Index")]
