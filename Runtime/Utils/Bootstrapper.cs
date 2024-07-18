@@ -6,11 +6,11 @@ namespace FiveBabbittGames
     public class Bootstrapper : Singleton<Bootstrapper>
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        public static async void Init(bool inDevelopment = true)
+        public static async void Init(bool runFromBootstrapper = false) // change this value when building the project
         {
             DontDestroyOnLoad(Instantiate(Resources.Load("Systems")));
 
-            if (!inDevelopment)
+            if (runFromBootstrapper)
                 await SceneManager.LoadSceneAsync("Bootstrapper", LoadSceneMode.Single);
         }
     }
