@@ -12,7 +12,7 @@ namespace FiveBabbittGames
         {
             DontDestroyOnLoad(Instantiate(Resources.Load("Systems")));
 
-            if (settings.runFromBootsrapperScene)
+            if (settings.runFromBootsrapperScene) // Create Asset in the Resources Directory if this throws and error
                 await SceneManager.LoadSceneAsync("Bootstrapper", LoadSceneMode.Single);
         }
     }
