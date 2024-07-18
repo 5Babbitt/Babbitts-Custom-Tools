@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace FiveBabbittGames
-{ 
+{
     public class Bootstrapper : Singleton<Bootstrapper>
     {
         static BootstrapperSettings settings = Resources.FindObjectsOfTypeAll<BootstrapperSettings>()[0];
@@ -15,12 +15,6 @@ namespace FiveBabbittGames
             if (settings.runFromBootsrapperScene)
                 await SceneManager.LoadSceneAsync("Bootstrapper", LoadSceneMode.Single);
         }
-    }
-
-    [CreateAssetMenu(fileName = "Bootstrapper Settings", menuName = "Settings")]
-    public class BootstrapperSettings : ScriptableObject
-    {
-        public bool runFromBootsrapperScene = false; // change this value when building the project
     }
 }
 
