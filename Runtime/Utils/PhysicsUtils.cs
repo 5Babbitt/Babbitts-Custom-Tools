@@ -125,19 +125,36 @@ namespace FiveBabbittGames
             return center;
         }
 
-        public static bool ArcCast(Vector3 center, Quaternion rotation, float angle, float radius, int resolution, LayerMask layer, out RaycastHit hit)
+        static public bool ArcCast(Vector3 center, Quaternion rotation, float angle, float radius, int resolution, LayerMask layer, out RaycastHit hit, bool drawGizmos = false)
         {
             rotation *= Quaternion.Euler(-angle / 2, 0, 0);
 
+            float deltaAngle = angle / resolution;
+            Vector3 forwardRadius = Vector3.forward * radius;
+
+            Vector3 a, b, ab;
+            a = forwardRadius;
+            b = Quaternion.Euler(deltaAngle, 0, 0) * forwardRadius;
+            ab = b - a;
+            float abMagnitude = ab.magnitude * 1.001f;
+
             for (int i = 0; i < resolution; i++)
             {
-                Vector3 a = center + rotation * Vector3.forward * radius;
-                rotation *= Quaternion.Euler(angle / resolution, 0, 0);
-                Vector3 b = center + rotation * Vector3.forward * radius;
-                Vector3 ab = b - a;
+                a = center + rotation * forwardRadius;
+                rotation *= Quaternion.Euler(deltaAngle, 0, 0);
+                b = center + rotation * forwardRadius;
+                ab = b - a;
 
-                if (Physics.Raycast(a, ab, out hit, ab.magnitude * 1.001f, layer))
+                if (Physics.Raycast(a, ab, out hit, abMagnitude, layer))
+                {
+                    if (drawGizmos)
+                        Gizmos.DrawLine(a, hit.point);
+
                     return true;
+                }
+
+                if (drawGizmos)
+                    Gizmos.DrawLine(a, b);
             }
 
             hit = new RaycastHit();
