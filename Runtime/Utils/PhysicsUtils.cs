@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FiveBabbittGames
 {
-    public static class PhysicsHelper
+    public static class PhysicsUtils
     {
         public static void ApplyForceToReachVelocity(Rigidbody rigidbody, Vector3 velocity, float force = 1, ForceMode mode = ForceMode.Force)
         {
@@ -123,6 +123,25 @@ namespace FiveBabbittGames
             for (int i = 0; i < points.Length; i++)
                 center += points[i] / points.Length;
             return center;
+        }
+
+        public static bool ArcCast(Vector3 center, Quaternion rotation, float angle, float radius, int resolution, LayerMask layer, out RaycastHit hit)
+        {
+            rotation *= Quaternion.Euler(-angle / 2, 0, 0);
+
+            for (int i = 0; i < resolution; i++)
+            {
+                Vector3 a = center + rotation * Vector3.forward * radius;
+                rotation *= Quaternion.Euler(angle / resolution, 0, 0);
+                Vector3 b = center + rotation * Vector3.forward * radius;
+                Vector3 ab = b - a;
+
+                if (Physics.Raycast(a, ab, out hit, ab.magnitude * 1.001f, layer))
+                    return true;
+            }
+
+            hit = new RaycastHit();
+            return false;
         }
     }
 }
