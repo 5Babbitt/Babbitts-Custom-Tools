@@ -125,40 +125,56 @@ namespace FiveBabbittGames
             return center;
         }
 
+        /// <summary>
+        /// Perform a raycast along an arc shape defined by a center, rotation, angle, and radius
+        /// </summary>
+        /// <param name="center">Center of the arc</param>
+        /// <param name="rotation">Rotation of the object casting</param>
+        /// <param name="angle">The angular range of the arc</param>
+        /// <param name="radius">Radius of the arc</param>
+        /// <param name="resolution">How smooth the arc is (higher = smoother)</param>
+        /// <param name="layer">Layers to detect hits</param>
+        /// <param name="hit"></param>
+        /// <param name="drawGizmos"></param>
+        /// <returns>True if hit the target layer</returns>
         static public bool ArcCast(Vector3 center, Quaternion rotation, float angle, float radius, int resolution, LayerMask layer, out RaycastHit hit, bool drawGizmos = false)
         {
+            // Adjust the initial rotation by half of the specified angle around the x-axis
             rotation *= Quaternion.Euler(-angle / 2, 0, 0);
 
+            // Calculate the angular step size for each resolution unit
             float deltaAngle = angle / resolution;
             Vector3 forwardRadius = Vector3.forward * radius;
 
-            Vector3 a, b, ab;
-            a = forwardRadius;
-            b = Quaternion.Euler(deltaAngle, 0, 0) * forwardRadius;
-            ab = b - a;
-            float abMagnitude = ab.magnitude * 1.001f;
+            Vector3 a, b, ab; // Define vectors for points A, B, and the vector AB
+            a = forwardRadius; // Set the initial point A as the forward radius vector
+            b = Quaternion.Euler(deltaAngle, 0, 0) * forwardRadius; // Calculate point B after applying a rotation
+            ab = b - a; // Calculate the vector AB between points A and B
+            float abMagnitude = ab.magnitude * 1.001f; // Add a small margin to the magnitude of AB
 
+            // Iterate over the specified resolution
             for (int i = 0; i < resolution; i++)
             {
-                a = center + rotation * forwardRadius;
-                rotation *= Quaternion.Euler(deltaAngle, 0, 0);
-                b = center + rotation * forwardRadius;
-                ab = b - a;
+                a = center + rotation * forwardRadius; // Calculate the position of point A in world space
+                rotation *= Quaternion.Euler(deltaAngle, 0, 0); // Rotate the direction for the next iteration
+                b = center + rotation * forwardRadius; // Calculate the position of point B in world space
+                ab = b - a; // Update the vector AB for the current iteration
 
+                // Perform a raycast from point A towards AB to check for collisions
                 if (Physics.Raycast(a, ab, out hit, abMagnitude, layer))
                 {
                     if (drawGizmos)
-                        Gizmos.DrawLine(a, hit.point);
+                        Gizmos.DrawLine(a, hit.point); // Draw a line from A to the hit point if visual debugging is enabled
 
-                    return true;
+                    return true; // Return true if a collision is detected
                 }
 
                 if (drawGizmos)
-                    Gizmos.DrawLine(a, b);
+                    Gizmos.DrawLine(a, b); // Draw a line from A to B for visual debugging
             }
 
-            hit = new RaycastHit();
-            return false;
+            hit = new RaycastHit(); // Reset the hit information if no collision is detected
+            return false; // Return false if no collisions are found within the specified resolution
         }
     }
 }

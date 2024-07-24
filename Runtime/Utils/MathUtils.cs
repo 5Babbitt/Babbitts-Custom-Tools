@@ -125,6 +125,20 @@ namespace FiveBabbittGames
 
             return output;
         }
+
+        public static Vector3 LerpByDistance(Vector3 origin, Vector3 destination, float distance)
+        {
+            Vector3 direction = destination - origin;
+            Vector3 lerpVector = origin + (distance * direction);
+            return lerpVector;
+        }
+
+        public static Vector2 LerpByDistance(Vector2 origin, Vector2 destination, float distance)
+        {
+            Vector2 direction = destination - origin;
+            Vector2 lerpVector = origin + (distance * direction);
+            return lerpVector;
+        }
     }
 
     public enum InvertAxis
