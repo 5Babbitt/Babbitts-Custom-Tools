@@ -8,7 +8,7 @@ namespace FiveBabbittGames
         static BootstrapperSettings settings;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        public static async void Init()
+        public static void Init()
         {
             DontDestroyOnLoad(Instantiate(Resources.Load("Systems")));
 
