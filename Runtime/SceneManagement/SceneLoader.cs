@@ -21,6 +21,7 @@ namespace FiveBabbittGames
 
         [Header("Scene Settings")]
         [SerializeField] SceneGroup[] sceneGroups;
+        public SceneGroup[] SceneGroups => sceneGroups;
 
         float targetProgress;
         bool isLoading;
@@ -34,10 +35,6 @@ namespace FiveBabbittGames
             manager.OnSceneLoaded += sceneName => Debug.Log($"Loaded: {sceneName}");
             manager.OnSceneUnloaded += sceneName => Debug.Log($"Unloaded: {sceneName}");
             manager.OnSceneGroupLoaded += () => Debug.Log("Scene group loaded");
-
-        #if UNITY_EDITOR
-            UpdateGroupIndex();
-        #endif
         }
 
         async void Start()
@@ -93,48 +90,7 @@ namespace FiveBabbittGames
             loadingCamera.gameObject.SetActive(enable);
         }
 
-        #if UNITY_EDITOR
-        [ContextMenu("Update Groups Index")]
-        public void UpdateGroupIndex()
-        {
-            List<string> enumStrings = new();
-
-            for (int i = 0; i < sceneGroups.Length; i++)
-            {
-                enumStrings.Add(sceneGroups[i].GroupName);
-            }
-
-            GenerateEnum("ESceneGroupIndex", enumStrings.ToArray());
-            Debug.Log("Scene Group Index Updated");
-        }
-
-        public void GenerateEnum(string enumName, string[] names)
-        {
-            string folderPath = $"Assets/_Scripts/Enums/";
-            string fullPath = folderPath + $"{enumName}.cs";
-
-            if (!Directory.Exists(folderPath))
-                Directory.CreateDirectory(folderPath);
-            
-            using (StreamWriter streamWriter = new StreamWriter(fullPath))
-            {
-                streamWriter.Write($"public enum {enumName}\n");
-                streamWriter.Write("{\n");
-
-                for (int i = 0; i < names.Length; i++)
-                {
-                    var enumString = names[i];
-
-                    streamWriter.Write($"\t{enumString.Replace(" ", "_")} = {i},\n");
-                }
-
-                streamWriter.Write("}\n");
-            }
-
-            AssetDatabase.Refresh();
-        }
     }
-    #endif
 
     public class LoadingProgress : IProgress<float> 
     { 
