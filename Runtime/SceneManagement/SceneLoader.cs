@@ -35,9 +35,9 @@ namespace FiveBabbittGames
             manager.OnSceneUnloaded += sceneName => Debug.Log($"Unloaded: {sceneName}");
             manager.OnSceneGroupLoaded += () => Debug.Log("Scene group loaded");
 
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
             UpdateGroupIndex();
-#endif
+        #endif
         }
 
         async void Start()
@@ -93,7 +93,7 @@ namespace FiveBabbittGames
             loadingCamera.gameObject.SetActive(enable);
         }
 
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         [ContextMenu("Update Groups Index")]
         public void UpdateGroupIndex()
         {
@@ -134,7 +134,7 @@ namespace FiveBabbittGames
             AssetDatabase.Refresh();
         }
     }
-#endif
+    #endif
 
     public class LoadingProgress : IProgress<float> 
     { 
