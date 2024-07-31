@@ -17,6 +17,7 @@ namespace FiveBabbittGames
         [SerializeField] float fillSpeed = 0.5f;
         [SerializeField] Canvas loadingCanvas;
         [SerializeField] Camera loadingCamera;
+        [SerializeField] bool runOnStart = false;
 
         [Header("Scene Settings")]
         [SerializeField] SceneGroup[] sceneGroups;
@@ -39,7 +40,8 @@ namespace FiveBabbittGames
 
         async void Start()
         {
-            await LoadSceneGroup(0);
+            if (runOnStart)
+                await LoadSceneGroup(0);
         }
 
         private void Update()
