@@ -40,6 +40,8 @@ namespace FiveBabbittGames
 
         async void Start()
         {
+            EnableLoadingCanvas(false);
+            
             if (runOnStart)
                 await LoadSceneGroup(0);
         }
