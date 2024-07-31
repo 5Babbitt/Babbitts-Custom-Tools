@@ -44,7 +44,6 @@ namespace FiveBabbittGames
                     continue;
 
                 var operation = SceneManager.LoadSceneAsync(sceneData.Reference.Path, LoadSceneMode.Additive);
-                await Task.Delay(TimeSpan.FromSeconds(0.25f));
 
                 operationGroup.Operations.Add(operation);
 
