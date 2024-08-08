@@ -8,14 +8,19 @@ namespace FiveBabbittGames
         static BootstrapperSettings settings;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        public static void Init()
+        public async static void Init()
         {
+            settings = Resources.Load("BootstrapperSettings") as BootstrapperSettings;
+            
+            if (settings == null)
+            {
+                settings = ScriptableObject.CreateInstance<BootstrapperSettings>();
+            }
+
             DontDestroyOnLoad(Instantiate(Resources.Load("Systems")));
 
-            //await SceneManager.LoadSceneAsync("Bootstrapper", LoadSceneMode.Single);
-            //settings = Resources.FindObjectsOfTypeAll<BootstrapperSettings>()[0];
-
-            //if (settings.runFromBootsrapperScene) // Create Asset in the Resources Directory if this throws and error
+            if (settings.runFromBootsrapperScene) // Create Asset in the Resources Directory if this throws and error
+                await SceneManager.LoadSceneAsync("Bootstrapper", LoadSceneMode.Single);
         }
     }
 }

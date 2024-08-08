@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -75,12 +76,21 @@ namespace FiveBabbittGames.Editors
         // Add the Systems prefab, which is used by the Bootstrapper, to the Resources Folder
         void InitializeResourcesFolder(string path)
         {
+            InitBootstrapperSettings(path);
+
             GameObject systemsPrefab = new GameObject("Systems");
             path = AssetDatabase.GenerateUniqueAssetPath(path + $"/{systemsPrefab.name}.prefab");
-
             PrefabUtility.SaveAsPrefabAsset(systemsPrefab, path);
-
             DestroyImmediate(systemsPrefab);
+        }
+
+        void InitBootstrapperSettings(string path)
+        {
+            BootstrapperSettings settings = CreateInstance<BootstrapperSettings>();
+            path = AssetDatabase.GenerateUniqueAssetPath($"{path}/{"BootstrapperSettings"}.asset");
+            AssetDatabase.CreateAsset(settings, path);
+            EditorUtility.FocusProjectWindow();
+            Selection.activeObject = settings;
         }
     }
 }
