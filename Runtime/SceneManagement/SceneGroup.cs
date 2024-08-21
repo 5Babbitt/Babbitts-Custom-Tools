@@ -37,6 +37,7 @@ namespace FiveBabbittGames
         MainMenu,
         UI,
         HUD,
-        Environment
+        Environment,
+        Audio
     }
 }
