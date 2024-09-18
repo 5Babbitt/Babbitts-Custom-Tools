@@ -8,16 +8,24 @@ namespace FiveBabbittGames
     {
         public List<GameEventListener> listeners = new List<GameEventListener>();
 
-        public void Raise() {
+        public void Raise() 
+        {
             Raise(null, null);
         }
 
-        public void Raise(object data) {
+        public void Raise(object data) 
+        {
             Raise(null, data);
         }
 
-        public void Raise(Component sender) {
+        public void Raise(Component sender) 
+        {
             Raise(sender, null);
+        }
+
+        public void Raise(bool data)
+        {
+            Raise(null, data);
         }
 
         public void Raise(string data)
