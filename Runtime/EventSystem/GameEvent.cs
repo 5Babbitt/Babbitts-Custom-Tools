@@ -6,7 +6,9 @@ namespace FiveBabbittGames
     [CreateAssetMenu(menuName="GameEvent")]
     public class GameEvent : ScriptableObject
     {
-        public List<GameEventListener> listeners = new List<GameEventListener>();
+        private readonly List<GameEventListener> listeners = new List<GameEventListener>();
+
+        public bool ShowDebug;
 
         public void Raise() 
         {
@@ -55,6 +57,12 @@ namespace FiveBabbittGames
         {
             if (!listeners.Contains(listener))
                 listeners.Add(listener);
+
+            if (ShowDebug)
+            {
+                Debug.Log($"Listener is of type {listener.GetType()}");
+                Debug.Log(listener is GameEventListener);
+            }
         }
 
         public void UnregisterListener(GameEventListener listener) 
