@@ -1,7 +1,7 @@
 {
     "name": "com.5babbittgames.babbitts-custom-tools",
     "displayName": "Babbitts Custom Tools",
-    "version": "1.16.2",
+    "version": "1.17.0",
     "unity": "2022.3",
     "description": "A suite of my own custom tools that I like to make use of in my own development environment\nInstall the following dependencies: \n\ngit+https://github.com/starikcetin/Eflatun.SceneReference.git#4.0.0",
     "author": {
