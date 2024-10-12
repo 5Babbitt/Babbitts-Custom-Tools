@@ -139,6 +139,45 @@ namespace FiveBabbittGames
             Vector2 lerpVector = origin + (distance * direction);
             return lerpVector;
         }
+
+        /// <summary>
+        /// Get the point of intersection between two lines
+        /// </summary>
+        /// <param name="pointA">Endpoint of the first line</param>
+        /// <param name="directionA">Tangent/Direction at the endpoint of the first line</param>
+        /// <param name="pointB">Endpoint of the second line</param>
+        /// <param name="directionB">Tangent/Direction at the endpoint of the second line</param>
+        /// <returns>Points where the two lines intersect</returns>
+        public static Vector3 GetIntersectionPoint(Vector3 pointA, Vector3 directionA, Vector3 pointB, Vector3 directionB)
+        {
+            Vector2 p1 = new Vector2(pointA.x, pointA.z);
+            Vector2 p2 = new Vector2(pointB.x, pointB.z);
+
+            Vector2 dir1 = new Vector2(directionA.x, directionA.z).normalized;
+            Vector2 dir2 = new Vector2(directionB.x, directionB.z).normalized;
+
+            Vector2 end1 = p1 + dir1;
+            Vector2 end2 = p2 + dir2;
+
+            // calculate the gradients/slopes
+            float m1 = (end1.y - p1.y) / (end1.x - p1.x);
+            float m2 = (end2.y - p2.y) / (end2.x - p2.x);
+
+            // Get the y-intercepts
+            float b1 = p1.y - (m1 * p1.x);
+            float b2 = p2.y - (m2 * p2.x);
+
+            // Solve for x
+            float x = (b2 - b1) / (m1 - m2);
+
+            // Solve for y
+            float y = (pointA.y + pointB.y) / 2;
+
+            // Solve for z
+            float z = m1 * x + b1;
+
+            return new Vector3(x, y, z);
+        }
     }
 
     public enum InvertAxis
